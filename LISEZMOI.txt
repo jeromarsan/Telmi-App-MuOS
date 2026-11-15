@@ -1,0 +1,53 @@
+TELMI pour muOS
+===============
+
+Portage de Telmi OS (https://telmi.fr) en LÖVE 11.5, fidèle au code officiel
+(github.com/DantSu/Telmi-story-teller) : mêmes écrans, mêmes images, mêmes
+règles de lecture, mêmes sauvegardes.
+
+Installation
+------------
+Copier le dossier Telmi dans MUOS/application/ sur la carte SD.
+Il faut le runtime LÖVE 11.5 de PortMaster (le même que Sori Player).
+
+Les données vont à la RACINE de la carte SD, comme sur Telmi OS :
+  autorun.inf  marqueur « TelmiOS » : c'est lui qui fait reconnaître la carte par Telmi Sync
+  Stories/     histoires (format Telmi Sync : nodes.json, title.png, audios/, images/…)
+  Music/       musique : Artiste_Album_NumPiste_Titre.mp3 + .png (pochette, même nom)
+  Saves/       .parameters (réglages Telmi Sync) et sauvegardes des histoires
+(Le dossier sdcard-root/ contient autorun.inf et Saves/.parameters, prêts à
+coller à la racine ; Stories/, Music/ et Saves/Stories/ sont créés au lancement.)
+Telmi cherche ces dossiers sur /mnt/sdcard puis /mnt/mmc (la carte qui a
+autorun.inf) ; sans autorun.inf il les prend dans son propre dossier.
+
+Telmi Sync (Windows) : brancher la carte sur le PC, Telmi Sync l'affiche
+comme « TelmiOS v99.0.0 ». Le numéro 99 empêche Telmi Sync de proposer une
+« mise à jour » de Telmi OS (qui ne servirait à rien sous muOS).
+Toujours éjecter la carte proprement avant de la remettre dans la console.
+
+Dossier de l'appli (MUOS/application/Telmi/) :
+  res/       images et polices officielles de Telmi
+  *.lua      le programme, mux_launch.sh le lanceur muOS
+
+Boutons
+-------
+  Gauche / Droite   choisir (accueil, histoires, choix) ; -10 s / +10 s pendant la lecture
+  Haut / Bas        ligne ↑/↓ en mosaïque ; afficher la barre de temps pendant la lecture
+  A ou B            valider (OK)
+  X ou Y            retour (HOME)
+  START ou SELECT   pause / lecture
+  MENU              mosaïque <-> une histoire ; dans une histoire : sauvegarder et revenir au titre
+                    musique : lecteur <-> albums
+  MENU maintenu     verrouiller / déverrouiller (environ 2 s)
+  L1 / R1           volume - / +   (limité par « audioVolumeMax »)
+  MENU + L1/R1 ou MENU + L2/R2   luminosité - / +   (limitée par « screenBrightnessMax »)
+  MENU + START      quitter Telmi (retour à muOS)
+
+Mise en veille
+--------------
+Comme sur Telmi OS : après l'inactivité réglée dans .parameters (et 5 s après la
+fin du mode nuit), Telmi sauvegarde et éteint la console.
+Pour revenir au menu muOS à la place, mettre FIN_INACTIVITE="quitter" en haut
+de mux_launch.sh.
+
+Journal : telmi.log (dans ce dossier) après chaque lancement.
