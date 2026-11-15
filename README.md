@@ -13,7 +13,14 @@ It follows the official C code ([DantSu/Telmi-story-teller](https://github.com/D
 
 The **Telmi Sync** desktop app recognises the SD card, so you can download stories, podcasts and music to it as you would on a Miyoo Mini running Telmi OS.
 
-> Early version, tested on an RG40XXV. Bug reports are welcome. Attach `telmi.log` from the app folder.
+> Tested on an Anbernic RG40XXV running muOS. Bug reports are welcome. Attach `telmi.log` from the app folder.
+
+## Download
+
+Download `Telmi-vX.Y.Z.zip` from the [Releases](https://github.com/jeromarsan/Telmi-App-MuOS/releases) page. It contains:
+
+- `Telmi/`: the app, to copy to `MUOS/application/`
+- `sdcard-root/`: its **contents** go at the root of the card that will hold the stories
 
 ## Requirements
 
@@ -22,7 +29,7 @@ The **Telmi Sync** desktop app recognises the SD card, so you can download stori
 
 ## Installation
 
-1. Copy this folder to `MUOS/application/Telmi/` on the SD card. Skip `sdcard-root/`, `README.md` and `LICENSE`, which the app does not need.
+1. Copy the `Telmi/` folder to `MUOS/application/Telmi/` on the SD card. If you cloned the repository instead of using the release zip, the clone is the app folder: you can skip `sdcard-root/`, `README.md` and `LICENSE`.
 2. Copy the **contents** of `sdcard-root/` to the **root** of the card that will hold the stories (SD1 / Primary Storage or SD2):
    ```
    autorun.inf        marker "TelmiOS": makes Telmi Sync recognise the card
