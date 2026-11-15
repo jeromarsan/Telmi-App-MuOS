@@ -13,14 +13,14 @@ It follows the official C code ([DantSu/Telmi-story-teller](https://github.com/D
 
 The **Telmi Sync** desktop app recognises the SD card, so you can download stories, podcasts and music to it as you would on a Miyoo Mini running Telmi OS.
 
-> Tested on an Anbernic RG40XXV running muOS. Bug reports are welcome. Attach `telmi.log` from the app folder.
+> Tested on an Anbernic RG40XXV running muOS: stories and music play, and Telmi Sync recognises the card and transfers stories to it. Bug reports are welcome. Attach `telmi.log` from the app folder.
 
 ## Download
 
 Download `Telmi-vX.Y.Z.zip` from the [Releases](https://github.com/jeromarsan/Telmi-App-MuOS/releases) page. It contains:
 
 - `Telmi/`: the app, to copy to `MUOS/application/`
-- `sdcard-root/`: its **contents** go at the root of the card that will hold the stories
+- `sdcard-root/`: its **contents** go at the root of the card that will hold the stories. It holds `autorun.inf`, `Saves/.parameters`, and empty `Stories/`, `Music/` and `Saves/Stories/` folders.
 
 ## Requirements
 
@@ -35,7 +35,7 @@ Download `Telmi-vX.Y.Z.zip` from the [Releases](https://github.com/jeromarsan/Te
    autorun.inf        marker "TelmiOS": makes Telmi Sync recognise the card
    Saves/.parameters  Telmi settings (editable in Telmi Sync)
    ```
-   The app creates `Stories/`, `Music/` and `Saves/Stories/` at that root on first launch.
+   The release zip also contains empty `Stories/`, `Music/` and `Saves/Stories/` folders. If they are missing, the app creates them at that root on first launch.
 3. Put the card in your PC. Telmi Sync shows it as **TelmiOS v99.0.0**. Version 99 stops Telmi Sync from offering a Telmi OS update, which would be useless on muOS.
 
 At launch, Telmi picks the first root (`/mnt/sdcard`, `/mnt/mmc`, …) that contains an `autorun.inf` with "TelmiOS". If none has one, it uses the first root with a non-empty `Stories/` folder. If that fails too, it uses its own folder. To force a folder, set `TELMI_ROOT` at the top of `mux_launch.sh`.
